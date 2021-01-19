@@ -7,17 +7,23 @@ description:    Houdini Custom Functions
 #ifndef __METHOD_H__
 #define __METHOD_H__
 
+
 #include <voplib.h>
+
+#define     SWAP(a, b)      { a^=b; b^=a; a^=b; }
+
 
 vector Cam2WorldCoordinate(vector coordinate)
 {
     return vtransform("space:camera", "space:world", coordinate);
 }
 
+
 vector Cam2NDCCoordinate(vector coordinate)
 {
     return ptransform("space:camera", "space:ndc", coordinate);
 }
+
 
 vector CalcImgResolution(vector direction)
 {
@@ -26,10 +32,12 @@ vector CalcImgResolution(vector direction)
     return resDir * direction;
 }
 
+
 vector CalcOcclusion(vector origin; vector dir; string scope)
 {
     return filtershadow(origin, Cam2WorldCoordinate(dir), 0, "scope", scope, "angle", 0, "samples", 0);
 }
+
 
 vector SolveNormal(vector origin; matrix3 dir; string scope)
 {
@@ -44,6 +52,7 @@ vector SolveNormal(vector origin; matrix3 dir; string scope)
     return set(occx, occy, occz);
 }
 
+
 vector SolveMotionVector()
 {
     vector curtPos = Cam2NDCCoordinate(getblurP(0));
@@ -51,5 +60,6 @@ vector SolveMotionVector()
     vector diffPos = nextPos - curtPos;
     return CalcImgResolution(diffPos);
 }
+
 
 #endif
