@@ -3,7 +3,7 @@
 자주 사용하는 Houdini VEX 메소드 정의 파일이다.
 
 - method.h : 여러가지 정의.
-- PriorityQueue.h : Heap 자료구조를 이용한 우선순위 큐 정의. 성능: O(log2n)
+- PriorityQueue.h : Heap 자료구조를 이용한 우선순위 큐 정의. 성능: O(nlog2n)
 
 ```cpp
 #include "PriorityQueue.h"
